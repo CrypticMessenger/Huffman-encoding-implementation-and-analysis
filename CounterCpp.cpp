@@ -1,7 +1,11 @@
 #include <iostream>
 
 using namespace std;
+
 //!CONVERT TO C AT LAST
+//TODO: Struct start
+//TODO: Research about a better alternative of huffman trees and implement it 
+
 int main()
 {
 

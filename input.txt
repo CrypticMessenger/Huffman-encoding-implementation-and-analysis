@@ -1,0 +1,24 @@
+improvement, powers including self-replication, swarming a problem with
+many versions of itself, super high-speed calculations, running 24/7,
+mimicking friendliness, playing dead, and more. We’ve proposed that an
+artificial superintelligence won’t be satisfied with remaining isolated; its
+drives and intelligence would thrust it into our world and put our existence at
+risk. But why would a computer have drives at all? Why would they put us at
+risk?
+To answer these questions, we need to predict how powerful AI will
+behave. Fortunately, someone has laid the foundation for us.
+Surely no harm could come from building a chess-playing robot,
+could it?… such a robot will indeed be dangerous unless it is
+designed very carefully. Without special precautions, it will resist
+being turned off, will try to break into other machines and make
+copies of itself, and will try to acquire resources without regard for
+anyone else’s safety. These potentially harmful behaviors will occur
+not because they were programmed in at the start, but because of the
+intrinsic nature of goal driven systems.
+This paragraph’s author is Steve Omohundro. Tall, fit, energetic, and
+pretty darn cheerful for someone who’s peered deep into the maw of the
+intelligence explosion, he’s got a bouncy step, a vigorous handshake, and a
+smile that shoots out rays of goodwill. He met me at a restaurant in Palo
+Alto, the city next to Stanford University, where he graduated Phi Beta Kappa
+on the way to U.C. Berkeley and a Ph.D. in physics. He turned his thesis into
+the book Geometric Perturbation Theory in Physics on the new

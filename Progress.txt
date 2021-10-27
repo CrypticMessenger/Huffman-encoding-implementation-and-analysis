@@ -6,5 +6,6 @@
     Research about a better alternative of huffman trees, and think about implementing it if time allows(time will allow it most certainly).
     Convert all cpp files into C files at last.
     think about storing data using hashing(or maybe implimenting a map in C )
+    add comments for better navigation
     
     Members present-  Ankit, Amit; Tanish absent, because he was shifting.

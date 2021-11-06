@@ -9,3 +9,12 @@
     add comments for better navigation
     
     Members present-  Ankit, Amit; Tanish absent, because he was shifting.
+
+02-11-21:
+  -> Started making heaps, and basic sorting using O(n^2) (implemented), need to be optimised.
+  -> defined basic structs .
+  
+  TODO for session:
+    start implementing huffman algorithm.
+    
+    members present: Ankit, Amit, Tanish absent, because he was at home. 

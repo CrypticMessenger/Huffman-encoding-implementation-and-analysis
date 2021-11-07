@@ -6,12 +6,22 @@ using namespace std;
 ////  Struct start
 // TODO: Research about a better alternative of huffman trees and implement it
 ////T Make huffman tree
+struct encoding
+{
+    char alpha;
+    string code;
+};
 
 struct leaf_node
 {
     char alpha;
     int freq;
     struct leaf_node *left, *right;
+
+    //!
+    //string str;
+
+    //!
 };
 
 struct leaf_node *make_leaf(char alpha, int freq)
@@ -26,14 +36,6 @@ struct leaf_node *make_leaf(char alpha, int freq)
 }
 
 struct leaf_node **heap = (struct leaf_node **)calloc(128, sizeof(struct leaf_node *));
-
-void swap(struct leaf_node **ptr1, struct leaf_node **ptr2)
-{
-    struct leaf_node *temp = *ptr1;
-    temp = (*ptr1);
-    (*ptr1) = (*ptr2);
-    (*ptr2) = temp;
-}
 
 struct leaf_node **sort_heap(struct leaf_node **heap)
 {
@@ -61,6 +63,32 @@ void InorderTrav(struct leaf_node *root)
         printf("%d ", root->freq);
         InorderTrav(root->right);
     }
+}
+
+bool is_leaf(struct leaf_node *leaf)
+{
+    if (leaf->left == NULL && leaf->right == NULL)
+    {
+        return true;
+    }
+    return false;
+}
+
+int search(char c, struct leaf_node *root)
+{
+    if (is_leaf(root))
+    {
+        if(root->alpha == c){
+            return 1;
+        }
+        
+    }
+    else
+    {
+        search(c, root->left);
+        search(c, root->right);
+    }
+    return 0;
 }
 
 int main()
@@ -125,7 +153,7 @@ int main()
         struct leaf_node *temp1 = heap[0];
         struct leaf_node *temp2 = heap[1];
 
-        struct leaf_node *temp3 = make_leaf('a', (heap[0]->freq) + (heap[1]->freq));
+        struct leaf_node *temp3 = make_leaf(0, (heap[0]->freq) + (heap[1]->freq));
         temp3->left = temp1;
         temp3->right = temp2;
 
@@ -148,7 +176,10 @@ int main()
     }
 
     //InorderTrav(heap[0]);
+    //!
 
+    //!
+    printf("%d\n",search('f',heap[0]));
     fclose(fptr);
 
     return 0;

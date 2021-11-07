@@ -35,3 +35,7 @@
   ->TODO:
     ->implement huffman traversal encoding.
     members present: Ankit, Amit; (Tanish absent, because he was travelling for past 5 days.)
+
+08-11-21:
+  ->tried implementing traversal encoding, but failed. will see it later.
+  

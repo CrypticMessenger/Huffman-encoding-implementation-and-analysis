@@ -96,13 +96,13 @@ int main()
             index++;
         }
     }
-    for (int i = 0; i < 128; i++)
-    {
-        if (heap[i] != NULL)
-        {
-            printf("%c: % d\n", heap[i]->alpha, heap[i]->freq);
-        }
-    }
+    // for (int i = 0; i < 128; i++)
+    // {
+    //     if (heap[i] != NULL)
+    //     {
+    //         printf("%c: % d\n", heap[i]->alpha, heap[i]->freq);
+    //     }
+    // }
 
     //printf("----------------------x---------------------------\n");
 
@@ -117,7 +117,7 @@ int main()
         }
     }
 
-    printf("%d\n", heap_size);
+    //printf("%d\n", heap_size);
     int temp_size = heap_size;
 
     while (temp_size > 1)

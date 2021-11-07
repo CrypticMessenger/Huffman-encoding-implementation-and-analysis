@@ -8,7 +8,7 @@
     think about storing data using hashing(or maybe implimenting a map in C )
     add comments for better navigation
     
-    Members present-  Ankit, Amit; Tanish absent, because he was shifting.
+    Members present-  Ankit, Amit; (Tanish absent, because he was shifting.)
 
 02-11-21:
   -> Started making heaps, and basic sorting using O(n^2) (implemented), need to be optimised.
@@ -17,4 +17,21 @@
   TODO for session:
     start implementing huffman algorithm.
     
-    members present: Ankit, Amit, Tanish absent, because he was at home. 
+    members present: Ankit, Amit; (Tanish absent, because he was at home. )
+
+06-11-21:
+  -> started making huffman trees, but got struck in some segmentation fault.
+  ->TODO:
+    ->recheck fault.
+    ->solve the bug.
+    ->make huffman trees.
+
+    members present: Ankit, Amit; (Tanish absent)
+
+07-11-21:
+  ->used debugger to pin point segmentation fault, and resolved it successfully.
+  -> implemented algorithm to make huffman trees, by slightly modifying the previous algorithm.
+
+  ->TODO:
+    ->implement huffman traversal encoding.
+    members present: Ankit, Amit; (Tanish absent, because he was travelling for past 5 days.)

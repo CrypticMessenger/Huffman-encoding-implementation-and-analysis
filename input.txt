@@ -1,45 +1,26 @@
-It is sometimes proposed that direct brain–computer interfaces, particularly
-implants, could enable humans to exploit the fortes of digital computing—perfect
-recall, speedy and accurate arithmetic calculation, and high-bandwidth data
-transmission—enabling the resulting hybrid system to radically outperform the
-unaugmented brain.
-64 But although the possibility of direct connections between
-human brains and computers has been demonstrated, it seems unlikely that such
-interfaces will be widely used as enhancements any time soon.
-65
-To begin with, there are significant risks of medical complications—including
-infections, electrode displacement, hemorrhage, and cognitive decline—when
-implanting electrodes in the brain. Perhaps the most vivid illustration to date of the
-benefits that can be obtained through brain stimulation is the treatment of patients
-with Parkinson’s disease. The Parkinson’s implant is relatively simple: it does not
-really communicate with the brain but simply supplies a stimulating electric current
-to the subthalamic nucleus. A demonstration video shows a subject slumped in a
-chair, completely immobilized by the disease, then suddenly springing to life when
-the current is switched on: the subject now moves his arms, stands up and walks
-across the room, turns around and performs a pirouette. Yet even behind this
-especially simple and almost miraculously successful procedure, there lurk
-negatives. One study of Parkinson patients who had received deep brain implants
-showed reductions in verbal fluency, selective attention, color naming, and verbal
-memory compared with controls. Treated subjects also reported more cognitive
-complaints.
-66 Such risks and side effects might be tolerable if the procedure is used
-to alleviate severe disability. But in order for healthy subjects to volunteer
-themselves for neurosurgery, there would have to be some very substantial
-enhancement of normal functionality to be gained.
-This brings us to the second reason to doubt that superintelligence will be
-achieved through cyborgization, namely that enhancement is likely to be far more
-difficult than therapy. Patients who suffer from paralysis might benefit from an
-implant that replaces their severed nerves or activates spinal motion pattern
-generators.
-67 Patients who are deaf or blind might benefit from artificial cochleae
-and retinas.
-68 Patients with Parkinson’s disease or chronic pain might benefit from
-deep brain stimulation that excites or inhibits activity in a particular area of the
-brain.
-69 What seems far more difficult to achieve is a high-bandwidth direct
-interaction between brain and computer to provide substantial increases in
-intelligence of a form that could not be more readily attained by other means. Most
-of the potential benefits that brain implants could provide in healthy subjects could
-be obtained at far less risk, expense, and inconvenience by using our regular motor
-and sensory organs to interact with computers located outside of our bodies. We do
-not need to plug a fiber optic cable into our brains in order to access the Internet.
+Ferrucci, principal investigator for the DeepQA/Watson Project. Eliezer
+Yudkowsky always speaks, and there’s usually an ethicist or two as well as
+spokespeople for the extropian and transhuman communities. Extropians
+explore technologies and therapies that will permit humans to live forever.
+Transhumans think about hardware and cosmetic ways for increasing human
+capability, beauty, and … opportunities to live forever. Standing astride all
+the factions is the Colossus of the Singularity, a cofounder of the Singularity
+Summits, and the star of each gathering, Ray Kurzweil.
+The 2011 summit’s theme was IBM’s DeepQA (question answering)
+computer Watson, and Kurzweil gave a rote presentation on the history of
+chatbots and Q&A systems, entitled “From Eliza to Watson.” But midtalk he
+came to life to gut a maladroit essay coauthored by Microsoft cofounder Paul
+Allen, attacking his Singularity hypothesis.
+Kurzweil didn’t look particularly well—thin, a little halting, quieter than
+usual. He’s not the kind of speaker who eats up the stage or delivers zingers.
+To the contrary, he’s got a mild, robotic delivery, the kind that seems
+designed for hostage negotiations or bedtime stories. But it plays well
+against the casually revolutionary things he has to say. In an age when billionaires give presentations in pressed jeans, Kurzweil is wearing
+your uncle’s brown slacks, along with tasseled loafers, sports jacket, and
+glasses. He’s neither large nor small, but recently has started looking old,
+especially in comparison to the vigorous Kurzweil of my memory. He had
+been a mere fifty-two or so when I last interviewed him, and hadn’t yet
+started the intense calorie restriction diet that’s now part of his plan to slow
+his aging. With a fine-tuned regimen of diet, exercise, and supplements,
+Kurzweil plans to fend off death until technology finds the cure he’s certain
+will come.

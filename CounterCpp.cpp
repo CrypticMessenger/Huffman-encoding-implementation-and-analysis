@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 //! CONVERT TO C AT LAST
@@ -11,6 +11,29 @@ struct encoding
     char alpha;
     string code;
 };
+
+struct encoding **codes = (struct encoding **)calloc(128, sizeof(struct encoding *));
+
+void print_encoding(struct encoding **root, int total_node)
+{
+    for (int i = 0; i < total_node; i++)
+    {
+        printf(" %c : %s\n",root[i]->alpha, root[i]->code);
+    }
+}
+
+struct encoding *make_encoding(char alpha, int arr[], int top)
+{
+    struct encoding *n;
+    n = (struct encoding *)malloc(sizeof(struct encoding));
+    n->alpha = alpha;
+    string temp = "";
+    for (int i = 0; i < top; ++i)
+    {
+        temp = temp + (char)(arr[i] + 48);
+    }
+    n->code = temp;
+}
 
 struct leaf_node
 {
@@ -73,22 +96,36 @@ bool is_leaf(struct leaf_node *leaf)
     }
     return false;
 }
-
-int search(char c, struct leaf_node *root)
+//! Change names and algorithms.
+void printArr(int arr[], int n)
 {
+    int i;
+    for (i = 0; i < n; ++i)
+        printf("%d", arr[i]);
+
+    printf("\n");
+}
+int pointer = 0;
+void encoder(struct leaf_node *root, int arr[], int top)
+{
+
+    if (root->left != NULL)
+    {
+        arr[top] = 0;
+        encoder(root->left, arr, top + 1);
+    }
+    if (root->right != NULL)
+    {
+        arr[top] = 1;
+        encoder(root->right, arr, top + 1);
+    }
     if (is_leaf(root))
     {
-        if(root->alpha == c){
-            return 1;
-        }
-        
+        printf(" %c : ", root->alpha);
+        codes[pointer] = make_encoding(root->alpha, arr, top);
+        pointer++;
+        //printArr(arr, top);
     }
-    else
-    {
-        search(c, root->left);
-        search(c, root->right);
-    }
-    return 0;
 }
 
 int main()
@@ -135,18 +172,21 @@ int main()
     //printf("----------------------x---------------------------\n");
 
     heap = sort_heap(heap);
+    int minm = INT_MAX;
     int heap_size = 0;
     for (int i = 0; i < 128; i++)
     {
         if (heap[i] != NULL)
         {
             printf("%c: % d\n", heap[i]->alpha, heap[i]->freq);
+            minm = min(heap[i]->freq, minm);
             heap_size++;
         }
     }
 
     //printf("%d\n", heap_size);
     int temp_size = heap_size;
+    int total_node = heap_size;
 
     while (temp_size > 1)
     {
@@ -179,7 +219,15 @@ int main()
     //!
 
     //!
-    printf("%d\n",search('f',heap[0]));
+    //printf("%d\n",search('f',heap[0]));
+
+    //! write it in analysis how we calculated height of huffman tree
+    struct leaf_node *root = heap[0];
+    total_node = ceil(log2((float)total_node / minm));
+    int encry[total_node];
+    int top = 0;
+    encoder(root, encry, top);
+    print_encoding(codes,total_node);
     fclose(fptr);
 
     return 0;

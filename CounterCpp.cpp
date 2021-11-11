@@ -6,33 +6,23 @@ using namespace std;
 ////  Struct start
 // TODO: Research about a better alternative of huffman trees and implement it
 ////T Make huffman tree
+
 struct encoding
 {
     char alpha;
-    string code;
+    // string code;
+    char code[8];
 };
 
 struct encoding **codes = (struct encoding **)calloc(128, sizeof(struct encoding *));
 
-void print_encoding(struct encoding **root, int total_node)
+void print_encoding(struct encoding **codes, int total_node)
 {
     for (int i = 0; i < total_node; i++)
     {
-        printf(" %c : %s\n",root[i]->alpha, root[i]->code);
+        // printf(" %c : %s\n", codes[i]->alpha, codes[i]->code);
+        cout << codes[i]->alpha << " : " << codes[i]->code << endl;
     }
-}
-
-struct encoding *make_encoding(char alpha, int arr[], int top)
-{
-    struct encoding *n;
-    n = (struct encoding *)malloc(sizeof(struct encoding));
-    n->alpha = alpha;
-    string temp = "";
-    for (int i = 0; i < top; ++i)
-    {
-        temp = temp + (char)(arr[i] + 48);
-    }
-    n->code = temp;
 }
 
 struct leaf_node
@@ -83,7 +73,8 @@ void InorderTrav(struct leaf_node *root)
     if (root)
     {
         InorderTrav(root->left);
-        printf("%d ", root->freq);
+        // printf("%d ", root->freq);
+        cout << root->freq << " ";
         InorderTrav(root->right);
     }
 }
@@ -97,15 +88,32 @@ bool is_leaf(struct leaf_node *leaf)
     return false;
 }
 //! Change names and algorithms.
-void printArr(int arr[], int n)
+int pointer = 0;
+
+void printArr(int arr[], int n, struct leaf_node *root)
 {
     int i;
-    for (i = 0; i < n; ++i)
-        printf("%d", arr[i]);
+    //string str = "";
+    char codde[n];
 
-    printf("\n");
+    for (i = 0; i < n; ++i)
+    {
+        // printf("%d", arr[i]);
+        cout << arr[i];
+        // str += std::to_string(arr[i]);
+        codde[i] = (char)(arr[i] + 48);
+    }
+    struct encoding *temp = (struct encoding *)malloc(sizeof(struct encoding));
+    temp->alpha = root->alpha;
+    // temp->code = str;
+    strcpy(temp->code, codde);
+    //temp->code=codde;
+    codes[pointer] = temp;
+    ++pointer;
+
+    cout << endl;
 }
-int pointer = 0;
+
 void encoder(struct leaf_node *root, int arr[], int top)
 {
 
@@ -121,10 +129,12 @@ void encoder(struct leaf_node *root, int arr[], int top)
     }
     if (is_leaf(root))
     {
-        printf(" %c : ", root->alpha);
-        codes[pointer] = make_encoding(root->alpha, arr, top);
-        pointer++;
-        //printArr(arr, top);
+        // printf(" %c : ", root->alpha);
+        cout << root->alpha << " : ";
+        // printf("top : %d ", top);
+        // codes[pointer]=make_encoding(root->alpha,arr,top);
+        printArr(arr, top, root);
+        // cout<<endl;
     }
 }
 
@@ -142,7 +152,7 @@ int main()
     fptr = fopen("./input.txt", "r");
     if (fptr == NULL)
     {
-        printf("Error! opening file");
+        cout << "Error! opening file" << endl;
         exit(1);
     }
     while ((c = fgetc(fptr)) != EOF)
@@ -178,15 +188,16 @@ int main()
     {
         if (heap[i] != NULL)
         {
-            printf("%c: % d\n", heap[i]->alpha, heap[i]->freq);
+            cout << heap[i]->alpha << " : " << heap[i]->freq << endl;
             minm = min(heap[i]->freq, minm);
             heap_size++;
         }
     }
 
-    //printf("%d\n", heap_size);
     int temp_size = heap_size;
+
     int total_node = heap_size;
+    int total_node1 = heap_size;
 
     while (temp_size > 1)
     {
@@ -215,19 +226,24 @@ int main()
         temp_size--;
     }
 
-    //InorderTrav(heap[0]);
+    // InorderTrav(heap[0]);
     //!
 
     //!
     //printf("%d\n",search('f',heap[0]));
 
-    //! write it in analysis how we calculated height of huffman tree
+    //TODO: write it in analysis how we calculated height of huffman tree
     struct leaf_node *root = heap[0];
-    total_node = ceil(log2((float)total_node / minm));
+
+    total_node = ceil(log2((float)(heap[0]->freq) / minm)) - 1;
+    // cout<<total_node<<endl;
     int encry[total_node];
+
     int top = 0;
+
     encoder(root, encry, top);
-    print_encoding(codes,total_node);
+    cout << endl;
+    print_encoding(codes, total_node1);
     fclose(fptr);
 
     return 0;

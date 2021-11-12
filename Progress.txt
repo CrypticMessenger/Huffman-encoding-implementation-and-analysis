@@ -38,4 +38,13 @@
 
 08-11-21:
   ->tried implementing traversal encoding, but failed. will see it later.
+
+09-11-21:
+  ->changed the way we were storing encodings, but still failed. (thought about storing them in structs).
+
+10-11-21:
+  ->slight improvement , but still failed. (storing them in structs).
+
+12-11-21:
+  -> totally changed the way we were storing encodings, Finally Success. (storing them in arrays like map).
   

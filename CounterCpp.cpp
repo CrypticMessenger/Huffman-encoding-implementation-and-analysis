@@ -5,6 +5,9 @@ using namespace std;
 //! CONVERT TO C AT LAST
 // TODO: Research about a better alternative of huffman trees and implement it
 
+
+
+//function to print characters and their corresponsing encodings.
 void print_codings(char characters[], string codings[], int len)
 {
     for (int i = 0; i < len; i++)
@@ -14,6 +17,7 @@ void print_codings(char characters[], string codings[], int len)
     cout << endl;
 }
 
+//Definition of leaf_node:
 struct leaf_node
 {
     char alpha;
@@ -21,6 +25,7 @@ struct leaf_node
     struct leaf_node *left, *right;
 };
 
+//function to allocate memory to leaf nodes.
 struct leaf_node *make_leaf(char alpha, int freq)
 {
     struct leaf_node *n;
@@ -32,7 +37,10 @@ struct leaf_node *make_leaf(char alpha, int freq)
     return n;
 }
 
+//
 struct leaf_node **heap = (struct leaf_node **)calloc(128, sizeof(struct leaf_node *));
+
+
 
 struct leaf_node **sort_heap(struct leaf_node **heap)
 {
@@ -52,16 +60,36 @@ struct leaf_node **sort_heap(struct leaf_node **heap)
     return heap;
 }
 
+// int partition(struct leaf_node **heap,int low,int high)
+// {
+// int 
+// }
+
+// void quickSort(struct leaf_node **heap,int low ,int high)
+
+// {
+//     int partitionindex;
+//     if(low<high)
+//     {
+//         partitionindex=partition(heap,low,high);
+//         quickSort(heap,low,partitionindex-1);
+//         quickSort(heap,partitionindex+1;high);
+//     }
+// }
+
+
 void InorderTrav(struct leaf_node *root)
 {
     if (root)
     {
         InorderTrav(root->left);
         // printf("%d ", root->freq);
+        cout << root->alpha << " : ";
         cout << root->freq << " ";
         InorderTrav(root->right);
     }
 }
+
 
 bool is_leaf(struct leaf_node *leaf)
 {
@@ -110,6 +138,19 @@ void encoder(struct leaf_node *root, int arr[], int top, char characters[], stri
     }
 }
 
+string write_encoder(char ch, char characters[], string codings[], int total_node1)
+{
+    int i;
+    for (i = 0; i < total_node1; i++)
+    {
+        if (characters[i] == ch)
+        {
+            break;
+        }
+    }
+    return codings[i];
+}
+
 int main()
 {
 
@@ -119,21 +160,26 @@ int main()
     {
         arr[i] = 0;
     }
-    FILE *fptr;
+    FILE *fptr, *fout;
     char c;
     fptr = fopen("./input1.txt", "r");
+    
+
     if (fptr == NULL)
     {
         cout << "Error! opening file" << endl;
         exit(1);
     }
+
     while ((c = fgetc(fptr)) != EOF)
     {
         arr[int(c)]++;
     }
 
     struct leaf_node *temp;
+
     int index = 0;
+
     for (int i = 0; i < 128; i++)
     {
         if (arr[i] != 0)
@@ -145,8 +191,11 @@ int main()
     }
 
     heap = sort_heap(heap);
+
     int minm = INT_MAX;
+
     int heap_size = 0;
+
     for (int i = 0; i < 128; i++)
     {
         if (heap[i] != NULL)
@@ -206,6 +255,37 @@ int main()
     //cout << total_node1<< endl;
 
     print_codings(characters, codings, total_node1);
+    
+    fclose(fptr);
+    
+    fout = fopen("./inter.txt", "w");
+    fptr = fopen("./input1.txt", "r");
+
+    if (fptr == NULL)
+    {
+        cout << "Error! opening file" << endl;
+        exit(1);
+    }
+    
+    while ((c = fgetc(fptr)) != EOF)
+    {   
+        string temp1="";
+        int i;
+        for(i=0;i<total_node1;++i)
+        {
+            if(characters[i]==c)break;
+        }
+        temp1+=codings[i];
+        for(int j=0;j<temp1.size();++j)
+        {
+            fprintf(fout,"%c",temp1[j]);
+        }
+        // fprintf(fout," ");
+        // fprintf(fout,"%s",temp1);
+        //cout<<temp1<<endl;
+    }
+
+    fclose(fout);
     fclose(fptr);
 
     return 0;

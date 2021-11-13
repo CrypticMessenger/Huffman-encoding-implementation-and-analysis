@@ -48,3 +48,10 @@
 12-11-21:
   -> totally changed the way we were storing encodings, Finally Success. (storing them in arrays like map).
   
+13-11-21:
+   ->TODO: start report writing.
+   ->ask doubt about compression and research some more.
+   ->start adding comments.
+   
+   DONE: checked output compressed(supposedly) file. not compressed actually. (we output it as .txt which is wrong.)
+  

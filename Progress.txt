@@ -54,4 +54,8 @@
    ->start adding comments.
    
    DONE: checked output compressed(supposedly) file. not compressed actually. (we output it as .txt which is wrong.)
+
+14-11-21:
+  -> researched a lot... A LOT... still hasn't found our answer.
+  -> mailed Kirandeep mam, regarding our doubt. 
   

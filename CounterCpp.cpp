@@ -2,10 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//! CONVERT TO C AT LAST
 // TODO: Research about a better alternative of huffman trees and implement it
-
-
 
 //function to print characters and their corresponsing encodings.
 void print_codings(char characters[], string codings[], int len)
@@ -22,14 +19,14 @@ struct leaf_node
 {
     char alpha;
     int freq;
-    struct leaf_node *left, *right;
+    struct leaf_node *left, *right; //left,right child pointer
 };
 
 //function to allocate memory to leaf nodes.
 struct leaf_node *make_leaf(char alpha, int freq)
 {
     struct leaf_node *n;
-    n = (struct leaf_node *)malloc(sizeof(struct leaf_node));
+    n = (struct leaf_node *)malloc(sizeof(struct leaf_node)); //creating a leaf_node and assigning memory dynnamically using malloc function
     n->alpha = alpha;
     n->freq = freq;
     n->left = NULL;
@@ -37,19 +34,22 @@ struct leaf_node *make_leaf(char alpha, int freq)
     return n;
 }
 
-//
+//an array of pointer to store address of node.
+//we allocate 128 sized memory to heap array because characters can have maximum ASCII value of 128
 struct leaf_node **heap = (struct leaf_node **)calloc(128, sizeof(struct leaf_node *));
 
-
-
+//sorting the heap element according to their frequency
 struct leaf_node **sort_heap(struct leaf_node **heap)
 {
+    //O(n^2 time to sort heap)
     for (int i = 0; i < 127; ++i)
     {
         for (int j = i + 1; j < 128; ++j)
         {
+            //checking if the i-th as well as j-th address in heap is pointing to NULL or not,
             if (heap[i] != NULL && heap[j] != NULL && heap[j]->freq < heap[i]->freq)
             {
+                //sorting
                 struct leaf_node *temp;
                 temp = heap[i];
                 heap[i] = heap[j];
@@ -60,37 +60,18 @@ struct leaf_node **sort_heap(struct leaf_node **heap)
     return heap;
 }
 
-// int partition(struct leaf_node **heap,int low,int high)
-// {
-// int 
-// }
-
-// void quickSort(struct leaf_node **heap,int low ,int high)
-
-// {
-//     int partitionindex;
-//     if(low<high)
-//     {
-//         partitionindex=partition(heap,low,high);
-//         quickSort(heap,low,partitionindex-1);
-//         quickSort(heap,partitionindex+1;high);
-//     }
-// }
-
-
+//Inorder traversal of heap by traversing (root->left ---> root ---> root->right)
 void InorderTrav(struct leaf_node *root)
 {
     if (root)
     {
         InorderTrav(root->left);
-        // printf("%d ", root->freq);
         cout << root->alpha << " : ";
         cout << root->freq << " ";
         InorderTrav(root->right);
     }
 }
-
-
+ //function to check if the node is leaf node or not
 bool is_leaf(struct leaf_node *leaf)
 {
     if (leaf->left == NULL && leaf->right == NULL)
@@ -100,20 +81,22 @@ bool is_leaf(struct leaf_node *leaf)
     return false;
 }
 //! Change names and algorithms.
-int pointer = 0;
+
+int pointer = 0;  //declaring a global variable pointer and initialising it to 0.
+
 
 void printArr(int arr[], int n, struct leaf_node *root, char characters[], string codings[])
 {
     int i;
-    string str = "";
+    string str = ""; //creating an empty string
 
     for (i = 0; i < n; ++i)
     {
         cout << arr[i];
-        str = str + (char)(arr[i] + 48);
+        str = str + (char)(arr[i] + 48); // converting the elements stored in array to string with the help of Ascii value
     }
     cout << endl;
-    characters[pointer] = root->alpha;
+    characters[pointer] = root->alpha; //storing character in charac
     codings[pointer] = str;
     ++pointer;
 }
@@ -258,7 +241,7 @@ int main()
     
     fclose(fptr);
     
-    fout = fopen("./inter.txt", "w");
+    fout = fopen("./inter.ank", "wb");
     fptr = fopen("./input1.txt", "r");
 
     if (fptr == NULL)

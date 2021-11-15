@@ -3,7 +3,6 @@
 using namespace std;
 
 // TODO: Research about a better alternative of huffman trees and implement it
-
 //function to print characters and their corresponsing encodings.
 void print_codings(char characters[], string codings[], int len)
 {
@@ -71,7 +70,7 @@ void InorderTrav(struct leaf_node *root)
         InorderTrav(root->right);
     }
 }
- //function to check if the node is leaf node or not
+//function to check if the node is leaf node or not
 bool is_leaf(struct leaf_node *leaf)
 {
     if (leaf->left == NULL && leaf->right == NULL)
@@ -82,8 +81,7 @@ bool is_leaf(struct leaf_node *leaf)
 }
 //! Change names and algorithms.
 
-int pointer = 0;  //declaring a global variable pointer and initialising it to 0.
-
+int pointer = 0; //declaring a global variable pointer and initialising it to 0.
 
 void printArr(int arr[], int n, struct leaf_node *root, char characters[], string codings[])
 {
@@ -100,10 +98,11 @@ void printArr(int arr[], int n, struct leaf_node *root, char characters[], strin
     codings[pointer] = str;
     ++pointer;
 }
-
+//encoding function
 void encoder(struct leaf_node *root, int arr[], int top, char characters[], string codings[])
 {
-
+    //we start from root of huffmann tree and assing '0' when we move to the left and assign '1' when we move to the right,
+    //and store the encoding of correspondings character when we reach to the leaf node.
     if (root->left != NULL)
     {
         arr[top] = 0;
@@ -116,14 +115,14 @@ void encoder(struct leaf_node *root, int arr[], int top, char characters[], stri
     }
     if (is_leaf(root))
     {
-        // cout << root->alpha << " : ";
         printArr(arr, top, root, characters, codings);
     }
 }
-
+//function to find encodings of a given characters
 string write_encoder(char ch, char characters[], string codings[], int total_node1)
 {
     int i;
+    //finding at which index character is present
     for (i = 0; i < total_node1; i++)
     {
         if (characters[i] == ch)
@@ -131,22 +130,23 @@ string write_encoder(char ch, char characters[], string codings[], int total_nod
             break;
         }
     }
+    //returning the string(encoding) present at that index
     return codings[i];
 }
 
 int main()
 {
+    //declaring an array of size 128 because ascii value can maximum goes upto 127 starting from 0.
+    //we are not using extended ascii which is of 8 bits.
 
-    int arr[128];
-
+    int arr[128]; //used to store frequency of each character
     for (int i = 0; i < 128; i++)
     {
         arr[i] = 0;
     }
     FILE *fptr, *fout;
     char c;
-    fptr = fopen("./input1.txt", "r");
-    
+    fptr = fopen("./input1.txt", "r"); //opening the input file in reading mode
 
     if (fptr == NULL)
     {
@@ -156,17 +156,17 @@ int main()
 
     while ((c = fgetc(fptr)) != EOF)
     {
-        arr[int(c)]++;
+        arr[int(c)]++; //we are storing frequency of each character to their correspind ascii value
     }
 
     struct leaf_node *temp;
 
     int index = 0;
-
     for (int i = 0; i < 128; i++)
     {
         if (arr[i] != 0)
         {
+            //we are storing only those characters to heap array whose frequency is non zero
             temp = make_leaf(i, arr[i]);
             heap[index] = temp;
             index++;
@@ -175,73 +175,76 @@ int main()
 
     heap = sort_heap(heap);
 
-    int minm = INT_MAX;
+    int minm = INT_MAX; //declaring a minm variable to maximum value of integer which is approx "2147483647"
 
     int heap_size = 0;
-
     for (int i = 0; i < 128; i++)
     {
         if (heap[i] != NULL)
         {
             cout << heap[i]->alpha << " : " << heap[i]->freq << endl;
-            minm = min(heap[i]->freq, minm);
+            minm = min(heap[i]->freq, minm); //finding the minimum frequency character in text file
             heap_size++;
         }
     }
-
+    //temporary variable
     int temp_size = heap_size;
-
     int total_node = heap_size;
     int total_node1 = heap_size;
 
+    //Applying the Huffmann algorithm
     while (temp_size > 1)
     {
         struct leaf_node *temp1 = heap[0];
         struct leaf_node *temp2 = heap[1];
-
+        //creating a new node which frequency is sum of minm two frequency!!
         struct leaf_node *temp3 = make_leaf(0, (heap[0]->freq) + (heap[1]->freq));
         temp3->left = temp1;
         temp3->right = temp2;
 
+        //we are making first two pointer stored in heap to NULL
         heap[0] = NULL;
         heap[1] = NULL;
 
-        heap[heap_size] = temp3;
+        heap[heap_size] = temp3; //isnerting new node in heap at the end of heap
         struct leaf_node *ptr;
 
         for (int i = 2; i < heap_size + 1; ++i)
         {
+            //After inserting new node at the end we are shifting each pointer two place to the left because first two pointer in heap becomes NULL
             ptr = heap[i];
             heap[i] = heap[i - 2];
             heap[i - 2] = ptr;
         }
 
         heap_size--;
-        heap = sort_heap(heap);
+        heap = sort_heap(heap); //sorting the heap array according to frequency of characters
         temp_size--;
     }
 
-    InorderTrav(heap[0]);
+    InorderTrav(heap[0]); //calling inorder function
 
     //TODO: write it in analysis how we calculated height of huffman tree
     struct leaf_node *root = heap[0];
 
-    total_node = ceil(log2((float)(heap[0]->freq) / minm)) - 1;
+    total_node = ceil(log2((float)(heap[0]->freq) / minm)) - 1; //calculating the height of huffmann tree according to formula
 
-    int encry[total_node];
+    int encry[total_node]; //temporary array to store data temporary to find encoding of each character
 
     int top = 0;
-    char characters[total_node1];
-    string codings[total_node1];
+
+    char characters[total_node1]; //['a','@'...] character array to store each character
+    string codings[total_node1];  //["01","0101"] string array for storing encoding of each corresponding character
+
     encoder(root, encry, top, characters, codings);
     cout << endl;
     //cout << total_node1<< endl;
 
     print_codings(characters, codings, total_node1);
-    
+
     fclose(fptr);
-    
-    fout = fopen("./inter.ank", "wb");
+
+    fout = fopen("./inter.txt", "wb");
     fptr = fopen("./input1.txt", "r");
 
     if (fptr == NULL)
@@ -249,19 +252,20 @@ int main()
         cout << "Error! opening file" << endl;
         exit(1);
     }
-    
+
     while ((c = fgetc(fptr)) != EOF)
-    {   
-        string temp1="";
+    {
+        string temp1 = "";
         int i;
-        for(i=0;i<total_node1;++i)
+        for (i = 0; i < total_node1; ++i)
         {
-            if(characters[i]==c)break;
+            if (characters[i] == c)
+                break;
         }
-        temp1+=codings[i];
-        for(int j=0;j<temp1.size();++j)
+        temp1 += codings[i];
+        for (int j = 0; j < temp1.size(); ++j)
         {
-            fprintf(fout,"%c",temp1[j]);
+            fprintf(fout, "%c", temp1[j]);
         }
         // fprintf(fout," ");
         // fprintf(fout,"%s",temp1);

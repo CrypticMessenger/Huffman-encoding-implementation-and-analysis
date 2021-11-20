@@ -26,7 +26,6 @@
     ->solve the bug.
     ->make huffman trees.
 
-    members present: Ankit, Amit; (Tanish absent)
 
 07-11-21:
   ->used debugger to pin point segmentation fault, and resolved it successfully.
@@ -57,5 +56,12 @@
 
 14-11-21:
   -> researched a lot... A LOT... still hasn't found our answer.
-  -> mailed Kirandeep mam, regarding our doubt. 
+  -> mailed Kirandeep mam, regarding our doubt.
+  ->Started writing the Overleaf report. 
+
+20-11-21
+  ->Added The ReadMeOverall.txt
+  ->Edited The Overleaf report, finalised the report.
+  ->Did some minor changes in the main.cpp regarding the final display
+
   

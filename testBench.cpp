@@ -8,12 +8,15 @@ int main()
     char c;
     fptr = fopen("./input.txt", "w");
     int num;
+    cout<<"enter total number of characters: ";
     cin >> num;
     while (num--)
     {
         int n;
         char ch;
+        cout<<"Enter Character Frequencies: ";
         cin >> n;
+        cout<<"Enter character: ";
         cin >> ch;
 
         if (fptr == NULL)

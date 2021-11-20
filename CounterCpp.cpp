@@ -90,10 +90,10 @@ void printArr(int arr[], int n, struct leaf_node *root, char characters[], strin
 
     for (i = 0; i < n; ++i)
     {
-        cout << arr[i];
+        //cout << arr[i];
         str = str + (char)(arr[i] + 48); // converting the elements stored in array to string with the help of Ascii value
     }
-    cout << endl;
+    //cout << endl;
     characters[pointer] = root->alpha; //storing character in charac
     codings[pointer] = str;
     ++pointer;
@@ -146,7 +146,7 @@ int main()
     }
     FILE *fptr, *fout;
     char c;
-    fptr = fopen("./input1.txt", "r"); //opening the input file in reading mode
+    fptr = fopen("./input.txt", "r"); //opening the input file in reading mode
 
     if (fptr == NULL)
     {
@@ -162,10 +162,12 @@ int main()
     struct leaf_node *temp;
 
     int index = 0;
+    float initial_size = 0;
     for (int i = 0; i < 128; i++)
     {
         if (arr[i] != 0)
         {
+            initial_size+=arr[i];
             //we are storing only those characters to heap array whose frequency is non zero
             temp = make_leaf(i, arr[i]);
             heap[index] = temp;
@@ -178,6 +180,9 @@ int main()
     int minm = INT_MAX; //declaring a minm variable to maximum value of integer which is approx "2147483647"
 
     int heap_size = 0;
+    
+    cout<<"Character and their corresponding frequency is:"<<endl;
+
     for (int i = 0; i < 128; i++)
     {
         if (heap[i] != NULL)
@@ -222,7 +227,7 @@ int main()
         temp_size--;
     }
 
-    InorderTrav(heap[0]); //calling inorder function
+    //InorderTrav(heap[0]); //calling inorder function
 
     //TODO: write it in analysis how we calculated height of huffman tree
     struct leaf_node *root = heap[0];
@@ -239,20 +244,20 @@ int main()
     encoder(root, encry, top, characters, codings);
     cout << endl;
     //cout << total_node1<< endl;
-
+    cout <<"Character and their corresponding encodings: "<< endl;
     print_codings(characters, codings, total_node1);
 
     fclose(fptr);
 
-    fout = fopen("./inter.txt", "wb");
-    fptr = fopen("./input1.txt", "r");
+    fout = fopen("./output.txt", "wb");
+    fptr = fopen("./input.txt", "r");
 
     if (fptr == NULL)
     {
         cout << "Error! opening file" << endl;
         exit(1);
     }
-
+    int final_size=0;
     while ((c = fgetc(fptr)) != EOF)
     {
         string temp1 = "";
@@ -263,6 +268,7 @@ int main()
                 break;
         }
         temp1 += codings[i];
+        final_size+=temp1.size();
         for (int j = 0; j < temp1.size(); ++j)
         {
             fprintf(fout, "%c", temp1[j]);
@@ -271,7 +277,12 @@ int main()
         // fprintf(fout,"%s",temp1);
         //cout<<temp1<<endl;
     }
-
+    float compression_ratio;
+    compression_ratio=(float)(initial_size*8)/final_size;
+    cout<<"initial size is: "<<8*initial_size<<endl;
+    cout<<"final size is: "<<final_size<<endl;
+    cout<<"Compression ratio is: "<<compression_ratio<<endl;
+    cout<<"Printing encoded text in output.txt ..."<<endl;
     fclose(fout);
     fclose(fptr);
 

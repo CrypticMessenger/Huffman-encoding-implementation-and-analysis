@@ -6,7 +6,7 @@ int main()
 {
     FILE *fptr;
     char c;
-    fptr = fopen("./input1.txt", "w");
+    fptr = fopen("./input.txt", "w");
     int num;
     cin >> num;
     while (num--)

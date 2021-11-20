@@ -2,8 +2,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// TODO: Research about a better alternative of huffman trees and implement it
-//function to print characters and their corresponsing encodings.
+
+//function to print characters and their corresponding encodings.
 void print_codings(char characters[], string codings[], int len)
 {
     for (int i = 0; i < len; i++)
@@ -25,7 +25,7 @@ struct leaf_node
 struct leaf_node *make_leaf(char alpha, int freq)
 {
     struct leaf_node *n;
-    n = (struct leaf_node *)malloc(sizeof(struct leaf_node)); //creating a leaf_node and assigning memory dynnamically using malloc function
+    n = (struct leaf_node *)malloc(sizeof(struct leaf_node)); //creating a leaf_node and assigning memory dynamically using malloc function
     n->alpha = alpha;
     n->freq = freq;
     n->left = NULL;
@@ -33,14 +33,13 @@ struct leaf_node *make_leaf(char alpha, int freq)
     return n;
 }
 
-//an array of pointer to store address of node.
+//an array of pointer to store the address of nodes.
 //we allocate 128 sized memory to heap array because characters can have maximum ASCII value of 128
 struct leaf_node **heap = (struct leaf_node **)calloc(128, sizeof(struct leaf_node *));
 
-//sorting the heap element according to their frequency
+//sorting the heap elements according to their frequency
 struct leaf_node **sort_heap(struct leaf_node **heap)
 {
-    //O(n^2 time to sort heap)
     for (int i = 0; i < 127; ++i)
     {
         for (int j = i + 1; j < 128; ++j)
@@ -56,11 +55,12 @@ struct leaf_node **sort_heap(struct leaf_node **heap)
             }
         }
     }
-    return heap;
+    return heap;         //return the heap
 }
 
-//Inorder traversal of heap by traversing (root->left ---> root ---> root->right)
-void InorderTrav(struct leaf_node *root)
+//Inorder traversal of heap by traversing ({root->left} ---> {root} ---> {root->right}) 
+//To get the ascending order of frequencies for storing in the MINHEAP
+void InorderTrav(struct leaf_node *root)    //recursive inorder traversal
 {
     if (root)
     {
@@ -70,7 +70,8 @@ void InorderTrav(struct leaf_node *root)
         InorderTrav(root->right);
     }
 }
-//function to check if the node is leaf node or not
+
+//boolean function to check if the node is leaf or not
 bool is_leaf(struct leaf_node *leaf)
 {
     if (leaf->left == NULL && leaf->right == NULL)
@@ -79,7 +80,7 @@ bool is_leaf(struct leaf_node *leaf)
     }
     return false;
 }
-//! Change names and algorithms.
+
 
 int pointer = 0; //declaring a global variable pointer and initialising it to 0.
 
@@ -91,34 +92,36 @@ void printArr(int arr[], int n, struct leaf_node *root, char characters[], strin
     for (i = 0; i < n; ++i)
     {
         //cout << arr[i];
-        str = str + (char)(arr[i] + 48); // converting the elements stored in array to string with the help of Ascii value
+        str = str + (char)(arr[i] + 48); // converting the elements stored in the array to character string with the help of ASCII value
     }
     //cout << endl;
-    characters[pointer] = root->alpha; //storing character in charac
+    characters[pointer] = root->alpha; //storing character in characters array
     codings[pointer] = str;
     ++pointer;
 }
+
 //encoding function
 void encoder(struct leaf_node *root, int arr[], int top, char characters[], string codings[])
 {
-    //we start from root of huffmann tree and assing '0' when we move to the left and assign '1' when we move to the right,
+    //we start from root of huffmann tree and assing '0' when we move to the left child and assign '1' when we move to the right child,
     //and store the encoding of correspondings character when we reach to the leaf node.
     if (root->left != NULL)
     {
         arr[top] = 0;
-        encoder(root->left, arr, top + 1, characters, codings);
+        encoder(root->left, arr, top + 1, characters, codings);   //recursively reaching the leaf nodes
     }
     if (root->right != NULL)
     {
         arr[top] = 1;
-        encoder(root->right, arr, top + 1, characters, codings);
+        encoder(root->right, arr, top + 1, characters, codings);  //recursively reaching the leaf nodes
     }
     if (is_leaf(root))
     {
         printArr(arr, top, root, characters, codings);
     }
 }
-//function to find encodings of a given characters
+
+//function to display encodings of the given characters
 string write_encoder(char ch, char characters[], string codings[], int total_node1)
 {
     int i;
@@ -130,17 +133,17 @@ string write_encoder(char ch, char characters[], string codings[], int total_nod
             break;
         }
     }
-    //returning the string(encoding) present at that index
+    //returning the string(encoding) present for that index
     return codings[i];
 }
 
 int main()
 {
-    //declaring an array of size 128 because ascii value can maximum goes upto 127 starting from 0.
-    //we are not using extended ascii which is of 8 bits.
+    //declaring an array of size 128 because ASCII value can maximum go upto 127 starting from 0.
+    //we are not using extended ASCII which is of 8 bits.
 
     int arr[128]; //used to store frequency of each character
-    for (int i = 0; i < 128; i++)
+    for (int i = 0; i < 128; i++) //initialising to 0 at start
     {
         arr[i] = 0;
     }
@@ -148,7 +151,7 @@ int main()
     char c;
     fptr = fopen("./input.txt", "r"); //opening the input file in reading mode
 
-    if (fptr == NULL)
+    if (fptr == NULL)         //if no file is detected
     {
         cout << "Error! opening file" << endl;
         exit(1);
@@ -156,7 +159,7 @@ int main()
 
     while ((c = fgetc(fptr)) != EOF)
     {
-        arr[int(c)]++; //we are storing frequency of each character to their correspind ascii value
+        arr[int(c)]++; //we are storing frequency of each character to their corresponding ASCII value
     }
 
     struct leaf_node *temp;
@@ -181,7 +184,7 @@ int main()
 
     int heap_size = 0;
     
-    cout<<"Character and their corresponding frequency is:"<<endl;
+    cout<<"Character and their corresponding frequency is:"<<endl; //displaying the frequencies
 
     for (int i = 0; i < 128; i++)
     {
@@ -192,7 +195,7 @@ int main()
             heap_size++;
         }
     }
-    //temporary variable
+    //temporary variables
     int temp_size = heap_size;
     int total_node = heap_size;
     int total_node1 = heap_size;
@@ -202,16 +205,16 @@ int main()
     {
         struct leaf_node *temp1 = heap[0];
         struct leaf_node *temp2 = heap[1];
-        //creating a new node which frequency is sum of minm two frequency!!
+        //creating a new node whose frequency is sum of minimum two frequencies
         struct leaf_node *temp3 = make_leaf(0, (heap[0]->freq) + (heap[1]->freq));
         temp3->left = temp1;
         temp3->right = temp2;
 
-        //we are making first two pointer stored in heap to NULL
+        //we are initialising first two pointers stored in heap to NULL
         heap[0] = NULL;
         heap[1] = NULL;
 
-        heap[heap_size] = temp3; //isnerting new node in heap at the end of heap
+        heap[heap_size] = temp3; //inserting new node at the end of heap
         struct leaf_node *ptr;
 
         for (int i = 2; i < heap_size + 1; ++i)
@@ -223,7 +226,7 @@ int main()
         }
 
         heap_size--;
-        heap = sort_heap(heap); //sorting the heap array according to frequency of characters
+        heap = sort_heap(heap); //repeatedly sorting the heap array according to frequency of characters
         temp_size--;
     }
 
@@ -243,8 +246,8 @@ int main()
 
     encoder(root, encry, top, characters, codings);
     cout << endl;
-    //cout << total_node1<< endl;
-    cout <<"Character and their corresponding encodings: "<< endl;
+ 
+    cout <<"Character and their corresponding encodings: "<< endl; //displaying the encodings
     print_codings(characters, codings, total_node1);
 
     fclose(fptr);
@@ -252,7 +255,7 @@ int main()
     fout = fopen("./output.txt", "wb");
     fptr = fopen("./input.txt", "r");
 
-    if (fptr == NULL)
+    if (fptr == NULL)      //if no file is detected
     {
         cout << "Error! opening file" << endl;
         exit(1);
@@ -277,7 +280,7 @@ int main()
         // fprintf(fout,"%s",temp1);
         //cout<<temp1<<endl;
     }
-    float compression_ratio;
+    float compression_ratio;   //ratio of input/output sizes (in bits)
     compression_ratio=(float)(initial_size*8)/final_size;
     cout<<"initial size is: "<<8*initial_size<<endl;
     cout<<"final size is: "<<final_size<<endl;

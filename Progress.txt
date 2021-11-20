@@ -7,8 +7,6 @@
     Convert all cpp files into C files at last.
     think about storing data using hashing(or maybe implimenting a map in C )
     add comments for better navigation
-    
-    Members present-  Ankit, Amit; (Tanish absent, because he was shifting.)
 
 02-11-21:
   -> Started making heaps, and basic sorting using O(n^2) (implemented), need to be optimised.
@@ -16,8 +14,6 @@
   
   TODO for session:
     start implementing huffman algorithm.
-    
-    members present: Ankit, Amit; (Tanish absent, because he was at home. )
 
 06-11-21:
   -> started making huffman trees, but got struck in some segmentation fault.

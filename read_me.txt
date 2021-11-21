@@ -1,4 +1,5 @@
 Instructions to run the program:
+ -We have used gcc compiler to compile the program.
  -Enter the text that you want to compress in to input.txt file.
  -For making new node that need to store only frequnecy, we have added "NULL" character at that node.
  -If you want to test our code by giving input to a character and it's frequency, then you can do it by using testBench.cpp .
